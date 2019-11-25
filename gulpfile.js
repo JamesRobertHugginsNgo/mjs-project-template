@@ -2,6 +2,8 @@ const del = require('del');
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const gulpfile = require('gulp-file');
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config.js');
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +18,21 @@ function buildJs() {
 		.pipe(gulp.dest('dist'));
 }
 
-exports.default = gulp.series(cleanup, gulp.parallel(buildJs));
+function bundleMjs() {
+	return new Promise((resolve, reject) => {
+		webpack(webpackConfig, (err, stats) => {
+			if (err) {
+				return reject(err);
+			}
+			if (stats.hasErrors()) {
+				return reject(new Error(stats.compilation.errors.join('\n')));
+			}
+			resolve();
+		});
+	});
+}
+
+exports.default = gulp.series(cleanup, buildJs, bundleMjs);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -48,4 +64,4 @@ exports.scaffold = function () {
 		.pipe(gulpfile('package.json', JSON.stringify(pkg, null, 2)))
 		.pipe(gulpfile('README.md', `# ${app}\n\nDescription`))
 		.pipe(gulp.dest(`../${app}`));
-}
+};
