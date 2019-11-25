@@ -23,7 +23,7 @@ function copyDependencies() {
 			const path = `${modulePath}/${key}`;
 			const distPath = `${path}/dist`;
 			if (fs.existsSync(distPath)) {
-				streams.push(gulp.src([`${distPath}/**/*`, `!${distPath}/lib/**/*`]).pipe(gulp.dest(`dist/lib/${key}`)));
+				streams.push(gulp.src([`${distPath}/**/*`, `!${distPath}/lib`, `!${distPath}/lib/**/*`]).pipe(gulp.dest(`dist/lib/${key}`)));
 			} else {
 				streams.push(gulp.src([`${path}/**/*`]).pipe(gulp.dest(`dist/lib/${key}`)));
 			}
