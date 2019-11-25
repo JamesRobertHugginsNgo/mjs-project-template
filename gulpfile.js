@@ -24,20 +24,20 @@ function copyDependencies() {
 			const distPath = `${path}/dist`;
 			if (fs.existsSync(distPath)) {
 				srcs.push(`${distPath}/**/*`);
+				srcs.push(`!${distPath}/lib/**/*`);
 			} else {
 				srcs.push(`${path}/**/*`);
+				srcs.push(`!${path}/lib/**/*`);
 			}
 		}
 	}
-
-	console.log('SRCS', srcs);
 
 	return gulp.src(srcs, { base: modulePath })
 		.pipe(gulp.dest('dist/lib'));
 }
 
 function buildJs() {
-	return gulp.src(['src/**/*[^.eslintrc].js', 'src/**/*.mjs'], { since: gulp.lastRun(buildJs) })
+	return gulp.src(['src/**/*.js', 'src/**/*.mjs'], { since: gulp.lastRun(buildJs) })
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(gulp.dest('dist'));
