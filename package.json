@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/JamesRobertHugginsNgo/mjs-project-template#readme",
   "devDependencies": {
-    "eslint": "^6.7.0"
+    "del": "^5.1.0",
+    "eslint": "^6.7.0",
+    "gulp": "^4.0.2",
+    "gulp-eslint": "^6.0.0",
+    "gulp-file": "^0.4.0"
   }
 }
