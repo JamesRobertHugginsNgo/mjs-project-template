@@ -32,7 +32,12 @@ function bundleMjs() {
 	});
 }
 
-exports.default = gulp.series(cleanup, buildJs, bundleMjs);
+function copyDocs() {
+	return gulp.src(['src/**/*.htm', 'src/**/*.html', 'src/**/*.css'], { since: gulp.lastRun(copyDocs) })
+		.pipe(gulp.dest('dist'));
+}
+
+exports.default = gulp.series(cleanup, buildJs, bundleMjs, copyDocs);
 
 ////////////////////////////////////////////////////////////////////////////////
 
