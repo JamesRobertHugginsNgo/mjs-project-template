@@ -10,7 +10,7 @@ function cleanup() {
 }
 
 function buildJs() {
-	return gulp.src(['src/**/*.js', 'src/**/*.mjs'], { since: gulp.lastRun(buildJs) })
+	return gulp.src(['src/**/*[^.eslintrc].js', 'src/**/*.mjs'], { since: gulp.lastRun(buildJs) })
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(gulp.dest('dist'));
