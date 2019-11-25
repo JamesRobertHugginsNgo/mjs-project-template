@@ -1,0 +1,20 @@
+{
+  "name": "mjs-project-template",
+  "version": "1.0.0",
+  "description": "Tempate for projects using modular JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesRobertHugginsNgo/mjs-project-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesRobertHugginsNgo/mjs-project-template/issues"
+  },
+  "homepage": "https://github.com/JamesRobertHugginsNgo/mjs-project-template#readme"
+}
