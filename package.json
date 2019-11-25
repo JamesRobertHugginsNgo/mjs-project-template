@@ -27,6 +27,7 @@
     "gulp": "^4.0.2",
     "gulp-eslint": "^6.0.0",
     "gulp-file": "^0.4.0",
+    "merge-stream": "^2.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
