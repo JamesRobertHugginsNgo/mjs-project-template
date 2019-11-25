@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/JamesRobertHugginsNgo/mjs-project-template/issues"
   },
-  "homepage": "https://github.com/JamesRobertHugginsNgo/mjs-project-template#readme"
+  "homepage": "https://github.com/JamesRobertHugginsNgo/mjs-project-template#readme",
+  "devDependencies": {
+    "eslint": "^6.7.0"
+  }
 }
