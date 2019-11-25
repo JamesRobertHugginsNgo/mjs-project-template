@@ -1,0 +1,36 @@
+{
+  "name": "mjs-project-template",
+  "version": "1.0.0",
+  "description": "Tempate for projects using modular JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesRobertHugginsNgo/mjs-project-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesRobertHugginsNgo/mjs-project-template/issues"
+  },
+  "homepage": "https://github.com/JamesRobertHugginsNgo/mjs-project-template#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "del": "^5.1.0",
+    "eslint": "^6.7.0",
+    "gulp": "^4.0.2",
+    "gulp-eslint": "^6.0.0",
+    "gulp-file": "^0.4.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0"
+  }
+}
