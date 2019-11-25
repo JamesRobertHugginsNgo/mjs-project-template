@@ -3,6 +3,7 @@ const eslint = require('gulp-eslint');
 const fs = require('fs');
 const gulp = require('gulp');
 const gulpfile = require('gulp-file');
+const merge = require('merge-stream');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 
@@ -13,31 +14,28 @@ function cleanup() {
 }
 
 function copyDependencies() {
-	let srcs = [];
-
-	const modulePath = './node_modules';
+	const streams = [];
 
 	const pkg = require('./package.json');
 	if (pkg.dependencies) {
+		const modulePath = './node_modules';
 		for (const key in pkg.dependencies) {
 			const path = `${modulePath}/${key}`;
 			const distPath = `${path}/dist`;
 			if (fs.existsSync(distPath)) {
-				srcs.push(`${distPath}/**/*`);
+				// streams.push(gulp.src([`${distPath}/**/*`, `!${distPath}/lib`, `!${distPath}/lib/**/*`]).pipe(gulp.dest(`dist/lib/${key}`)));
+				streams.push(gulp.src([`${distPath}/**/*`]).pipe(gulp.dest(`dist/lib/${key}`)));
 			} else {
-				srcs.push(`${path}/**/*`);
+				streams.push(gulp.src([`${path}/**/*`]).pipe(gulp.dest(`dist/lib/${key}`)));
 			}
 		}
 	}
 
-	console.log('SRCS', srcs);
-
-	return gulp.src(srcs, { base: modulePath })
-		.pipe(gulp.dest('dist/lib'));
+	return merge(streams);
 }
 
 function buildJs() {
-	return gulp.src(['src/**/*[^.eslintrc].js', 'src/**/*.mjs'], { since: gulp.lastRun(buildJs) })
+	return gulp.src(['src/**/*.js', 'src/**/*.mjs'], { since: gulp.lastRun(buildJs) })
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(gulp.dest('dist'));
