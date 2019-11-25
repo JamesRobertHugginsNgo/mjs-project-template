@@ -9,8 +9,10 @@
 </head>
 
 <body>
-	<!-- <script type="module" src="scripts/index.mjs"></script> -->
-	<script src="scripts/bundle.js"></script>
+	<script src="/lib/@babel/polyfill/dist/polyfill.min.js"></script>
+
+	<script type="module" src="scripts/index.mjs"></script>
+	<script nomodule src="scripts/bundle.js"></script>
 </body>
 
 </html>

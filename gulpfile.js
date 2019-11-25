@@ -1,5 +1,6 @@
 const del = require('del');
 const eslint = require('gulp-eslint');
+const fs = require('fs');
 const gulp = require('gulp');
 const gulpfile = require('gulp-file');
 const webpack = require('webpack');
@@ -9,6 +10,30 @@ const webpackConfig = require('./webpack.config.js');
 
 function cleanup() {
 	return del('dist');
+}
+
+function copyDependencies() {
+	let srcs = [];
+
+	const modulePath = './node_modules';
+
+	const pkg = require('./package.json');
+	if (pkg.dependencies) {
+		for (const key in pkg.dependencies) {
+			const path = `${modulePath}/${key}`;
+			const distPath = `${path}/dist`;
+			if (fs.existsSync(distPath)) {
+				srcs.push(`${distPath}/**/*`);
+			} else {
+				srcs.push(`${path}/**/*`);
+			}
+		}
+	}
+
+	console.log('SRCS', srcs);
+
+	return gulp.src(srcs, { base: modulePath })
+		.pipe(gulp.dest('dist/lib'));
 }
 
 function buildJs() {
@@ -37,7 +62,7 @@ function copyDocs() {
 		.pipe(gulp.dest('dist'));
 }
 
-exports.default = gulp.series(cleanup, buildJs, bundleMjs, copyDocs);
+exports.default = gulp.series(cleanup, copyDependencies, buildJs, bundleMjs, copyDocs);
 
 ////////////////////////////////////////////////////////////////////////////////
 
